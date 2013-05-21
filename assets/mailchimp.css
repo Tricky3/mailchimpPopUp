@@ -1,0 +1,73 @@
+/* MAILCHIMP POPUP SIGNUP */
+
+#popup-signup{ display:none;}
+#popup-signup .vcenter{ display:table; position:fixed; top:0; left:0; bottom:0; right:0; width:100%; height:100%; z-index:10000; background-color:rgba(255,255,255,0.75);}
+#popup-signup .container{ display:table-cell; vertical-align:middle; text-align:center;}
+#popup-signup form{ position:relative; margin:0 auto; background:url("{{ 'bg_popup.jpg' | asset_url }}") no-repeat center center;}
+#popup-signup .subscribe{ }
+#popup-signup label{ font-family:{{ settings.h_font_family }};}
+#popup-signup input[type="text"]{ }
+#popup-signup .popup-close{ text-decoration:none; display:block; position:absolute; z-index:99999; top:-10px; right:-10px;}
+#popup-signup .popup-close:hover{ }
+#popup-signup .popup-responses { }
+#popup-signup .response { }
+#popup-signup .error-response { color:red; display:none;}
+#popup-signup .success-response { color:green; display:none;}
+
+/* BVALIDATOR */
+.bvalidator_invalid {
+	background-color: #FFFFAE
+}
+/* error message */
+.bvalidator_errmsg {
+	background-color: #333;
+	font-size: 10px;
+	border: 1px solid #999;
+	color: #FFF;
+	display: none;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	-moz-border-radius-bottomleft: 0;
+	-moz-border-radius-topleft: 0;
+	-webkit-border-bottom-left-radius: 0;
+	-moz-border-radius-bottomleft: 0;
+	border-bottom-left-radius: 0;
+	-webkit-border-top-left-radius: 0;
+	-moz-border-radius-topleft: 0;
+	border-top-left-radius: 0;
+	-moz-box-shadow: 0 0 6px #ddd;
+	-webkit-box-shadow: 0 0 6px #ddd;
+	box-shadow: 0 0 6px #ddd;
+	white-space: nowrap;
+	padding-top: 2px;
+	padding-right: 10px;
+	padding-bottom: 2px;
+	padding-left: 5px;
+	font-family: Arial, Helvetica, sans-serif;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+	filter: alpha(opacity=90);
+	opacity: 0.9;
+	filter: alpha(opacity=90)
+}
+/* close icon */
+.bvalidator_errmsg .bvalidator_close_icon {
+	margin-left: 5px;
+	margin-top: -2px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	color: #F96;
+	cursor: pointer
+}
+/* arrow */
+.bvalidator_errmsg em {
+	display: block;
+	border-color: #333 transparent transparent;
+	border-style: solid;
+	border-width: 10px 10px 0;
+	height: 0;
+	width: 0;
+	position: absolute;
+	bottom: -10px;
+	left: 5px
+}

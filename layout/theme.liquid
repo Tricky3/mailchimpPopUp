@@ -1,0 +1,6 @@
+{% if settings.popup_first != '0' %}
+  {% include 'mailchimp-signup-form' %}
+  {% include 'mailchimp-signup-script' %}
+  {{ 'mailchimp.js'  | asset_url | script_tag }}
+  {{ 'jquery.bvalidator.js'  | asset_url | script_tag }}
+{% endif %}
