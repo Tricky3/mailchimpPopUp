@@ -1,4 +1,4 @@
 mailchimpPopUp
 ==============
 
-Mailchimp Popup
+Mailchimp Popup Signup form for Shopify themes
