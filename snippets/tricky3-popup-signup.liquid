@@ -1,0 +1,26 @@
+<!-- Take your MailChimp subscribe form as generated from within your account: -->
+<!-- [form is t3-modified html5 - copy and paste values for best results:] -->
+<div id="mc_embed_popup" class="modalHolder">
+  <div class="ycenter">
+    <div class="xcenter">
+      <div class="modal">
+        <form action="http://xxxxxx.list-manage.com/subscribe/post?u=xxxxxx&amp;id=xxx" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+          <fieldset class="mc-field-group">
+            <legend>{{ settings.signup_title }}</legend>
+            <label for="name">Name:</label><br>
+            <input type="text" name="cm-name" id="name"><br>
+            <label for="abcd-efgh">Email:</label><br>
+            <input type="email" name="EMAIL" class="required email" data-bvalidator="required,email" id="mce-EMAIL" placeholder="you@youremail.com"{% if customer %} value="{{ customer.email }}"{% endif %} required>
+            <input type="submit" value="{{ settings.signup_submit_text }}" class="awesome">
+          </fieldset>
+          <div id="mce-responses" class="clearfix">
+            <div class="response" id="mce-error-response" style="display:none"></div>
+            <div class="response" id="mce-success-response" style="display:none"></div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- external trigger if you want one on the page -->
+<a href="http://" class="popupTrigger">{{ settings.popup_signup_trigger }}</a>

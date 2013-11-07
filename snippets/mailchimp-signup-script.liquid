@@ -1,9 +1,9 @@
 <script type="text/javascript">
-  {% assign first_visit = settings.popup_first %}
-  {% assign total_visits = settings.popup_total %}
+  {% assign first_visit = settings.modal_signup_first %}
+  {% assign total_visits = settings.modal_signup_total %}
   var _MC_cookie_name = 'MCEvilPopupClosed';
   var _Visits = [{{ first_visit }}{% for i in (1..total_visits) %}{% capture next_visit %}{{ first_visit | plus: i }}{% endcapture %},{{ next_visit }}{% endfor %}];
-  var _PageViewNumber = {{ settings.popup_page_view }};
+  var _PageViewNumber = {{ settings.modal_signup_page_view }};
   var _SessionCookieName = 'SessionCookie';
   var CookieValues = { NotSubmitted : 'NotSubmitted', HasSubmitted : 'HasSubmitted', ShowOnNextVisit: 'ShowOnNextVisit', ErrorInSubmitted: 'ErrorInSubmitted'};
   var _Popup_delay = {{ settings.popup_delay_time }};

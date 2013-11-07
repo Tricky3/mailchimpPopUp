@@ -1,22 +1,6 @@
-/* MAILCHIMP POPUP SIGNUP */
-
-#popup-signup{ display:none;}
-#popup-signup .vcenter{ display:table; position:fixed; top:0; left:0; bottom:0; right:0; width:100%; height:100%; z-index:10000; background-color:rgba(255,255,255,0.75);}
-#popup-signup .container{ display:table-cell; vertical-align:middle; text-align:center;}
-#popup-signup form{ position:relative; margin:0 auto; background:url("{{ 'bg_popup.jpg' | asset_url }}") no-repeat center center;}
-#popup-signup .subscribe{ }
-#popup-signup label{ font-family:{{ settings.h_font_family }};}
-#popup-signup input[type="text"]{ }
-#popup-signup .popup-close{ text-decoration:none; display:block; position:absolute; z-index:99999; top:-10px; right:-10px;}
-#popup-signup .popup-close:hover{ }
-#popup-signup .popup-responses { }
-#popup-signup .response { }
-#popup-signup .error-response { color:red; display:none;}
-#popup-signup .success-response { color:green; display:none;}
-
-/* BVALIDATOR */
+/* invalid input */
 .bvalidator_invalid {
-	background-color: #FFFFAE
+	background-color: #FFFFAE !important;
 }
 /* error message */
 .bvalidator_errmsg {
