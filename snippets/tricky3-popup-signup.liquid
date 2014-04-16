@@ -13,7 +13,7 @@
             <input type="email" name="EMAIL" class="required email" data-bvalidator="required,email" id="mce-EMAIL" placeholder="you@youremail.com"{% if customer %} value="{{ customer.email }}"{% endif %} required>
             <input type="submit" value="{{ settings.signup_submit_text }}" class="awesome">
           </fieldset>
-          <div id="mce-responses" class="clearfix">
+          <div id="mce-responses" class="clearfix response-wrapper">
             <div class="response" id="mce-error-response" style="display:none"></div>
             <div class="response" id="mce-success-response" style="display:none"></div>
           </div>
