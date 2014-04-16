@@ -1,57 +1,38 @@
-var head = document.getElementsByTagName('head')[0];
-var err_style = '';
-try {
-    err_style = mc_custom_error_style;
-} catch (e) {
-    err_style = '#mc_embed_popup input.mce_inline_error{border-color:#6B0505;} #mc_embed_popup div.mce_inline_error{margin: 0 0 1em 0; padding: 5px 10px; background-color:#6B0505; font-weight: bold; z-index: 1; color:#fff;}';
-}
-var head = document.getElementsByTagName('head')[0];
-var style = document.createElement('style');
-style.type = 'text/css';
-if (style.styleSheet) {
-    style.styleSheet.cssText = err_style;
-} else {
-    style.appendChild(document.createTextNode(err_style));
-}
-head.appendChild(style);
-var script = document.createElement('script');
-script.type = 'text/javascript';
-script.src = window.location.protocol + '//downloads.mailchimp.com/js/jquery.form-n-validate.js';
-head.appendChild(script);
-setTimeout('mce_preload_check();', 250);
+var _MailChimpPreloadChecks = 0;
 
-var mce_preload_checks = 0;
-function mce_preload_check() {
-    if (mce_preload_checks > 40) return;
-    mce_preload_checks++;
-    try {
-        var jqueryLoaded = jQuery;
-    } catch (err) {
-        setTimeout('mce_preload_check();', 250);
-        return;
-    }
-    try {
-        var validatorLoaded = jQuery("#fake-form").validate({});
-    } catch (err) {
-        setTimeout('mce_preload_check();', 250);
-        return;
-    }
-    mce_init_form();
-}
+(function(){
+	var head = document.getElementsByTagName('head')[0];
+	var script = document.createElement('script');
+	script.type = 'text/javascript';
+	script.src = window.location.protocol + '//downloads.mailchimp.com/js/jquery.form-n-validate.js';
+	head.appendChild(script);
+})();
 
-function mce_init_form() {
-    $(function () {
-        var isMobileDevice = IsMobileDevice();
-        if (!isMobileDevice) {
-            MailChimpPopupForm.Initialize();
-        }
-    });
-}
+$(function(){
+	var isMobileDevice = IsMobileDevice();
+	if(IsMailChimpScriptLoaded() && !isMobileDevice){
+		T3MCP.Initialize();
+	}
+});
+
+var IsMailChimpScriptLoaded = function(){
+    if (_MailChimpPreloadChecks > 40)
+	  return false;
+	_MailChimpPreloadChecks++;
+	try {
+        var validatorLoaded = $("#fake-form").validate({});
+		return true;
+    }catch (err) {
+        setTimeout('IsMailChimpScriptLoaded;', 250);
+        return false;
+    }
+};
 
 var VisitingCookieTracker = { Status: '', PageView: 0, Visits: 0, PopupAlreadyShownOnVisit: [] };
-var MailChimpPopupForm = {
+
+var T3MCP = {
     HideForm: function (saveCookie) {
-        $('#mc_embed_popup').hide();
+        T3MCP.Popup.hide();
         if (saveCookie) {
             //this.SaveJsonToCookie(_MC_cookie_name,CookieValues.ErrorInSubmitted,'','','',1);
         }
@@ -104,7 +85,7 @@ var MailChimpPopupForm = {
                 obj = JSON.parse(cookieObj);
             } catch (e) {
                 if (cookieObj.indexOf(CookieValues.HasSubmitted) != -1) {
-                    MailChimpPopupForm.SaveJsonToCookie(cookieName, CookieValues.HasSubmitted, '', '', '', 365);
+                    T3MCP.SaveJsonToCookie(cookieName, CookieValues.HasSubmitted, '', '', '', 365);
                     obj = JSON.parse(CookieManager.ReadCookie(cookieName));
                 }
             }
@@ -152,21 +133,24 @@ var MailChimpPopupForm = {
     },
     ShowForm: function (delay) {
         var delay = delay == null ? _Popup_delay : delay;
-        $('#mc_embed_popup a.mc_embed_close').show();
-        setTimeout(function () {
-            $('#mc_embed_popup').fadeIn();
+        $('.mc_embed_close', T3MCP.Popup).show();
+        
+		setTimeout(function () {
+            T3MCP.Popup.fadeIn();
         }, delay);
-        MailChimpPopupForm.LoadValidator();
-        MailChimpPopupForm.FormSubmit();
+		
+        T3MCP.LoadValidator();
+        T3MCP.FormSubmit();
     },
     LoadValidator: function () {
         var bValidatorOptions = {
             singleError: true
         };
-        $('#mc_embed_popup form').bValidator(bValidatorOptions);
+		
+        $('form', T3MCP.Popup).bValidator(bValidatorOptions);
     },
     FormSubmit: function () {
-        var formElem = $('#mc_embed_popup form');
+        var formElem = $('form', T3MCP.Popup);
         formElem.bind('submit', function (e) {
             var url = _URL + $(this).serialize() + '&c=?';
             var options = {
@@ -174,7 +158,7 @@ var MailChimpPopupForm = {
                 type: 'GET',
                 dataType: 'json',
                 contentType: "application/json; charset=utf-8",
-                success: MailChimpPopupForm.Success
+                success: T3MCP.Success
             };
             formElem.ajaxSubmit(options);
             e.preventDefault();
@@ -182,110 +166,83 @@ var MailChimpPopupForm = {
         });
     },
     InitCustomEvents: function () {
-        $('#mc_embed_popup a.mc_embed_close').click(function () {
-            MailChimpPopupForm.HideForm(true);
+        $('.mc_embed_close', T3MCP.Popup).click(function () {
+            T3MCP.HideForm(true);
         });
 
         $(document).keydown(function (e) {
             keycode = e == null ? event.keyCode : e.which;
             if (keycode == 27) {
-                MailChimpPopupForm.HideForm(true);
+                T3MCP.HideForm(true);
             }
         });
 
         $('body').click(function (e) {
-            if ($(e.target).is($('#mc_embed_popup div.xcenter'))) {
-                MailChimpPopupForm.HideForm(true);
+            if ($(e.target).is($('div.xcenter', T3MCP.Popup))) {
+                T3MCP.HideForm(true);
             }
         });
-    },
-    InitTopSignUpButton: function () {
-        $("#popup-signup").click(function (e) {
-            MailChimpPopupForm.ShowForm(500);
+		
+		$(".popupTrigger").click(function (e) {
+            T3MCP.ShowForm(500);
             e.stopPropagation();
             return false;
         });
     },
     Initialize: function () {
+		this.Popup = $('.modalHolder');
         this.HideForm(false);
         this.ReadCookiesAndShowPopup();
         this.InitCustomEvents();
-        this.InitTopSignUpButton();
     },
     Success: function (resp) {
-        $('#mce-success-response').hide();
-        $('#mce-error-response').hide();
+		var responseWrapper = $('.response-wrapper', T3MCP.Popup);
+        $('.response', responseWrapper).hide();
         if (resp.result == "success") {
-            MailChimpPopupForm.SaveJsonToCookie(_MC_cookie_name, CookieValues.HasSubmitted, '', '', '', 365)
-            $('#mce-' + resp.result + '-response').show();
-            $('#mce-' + resp.result + '-response').html(resp.msg);
-            $('#mc-embedded-popup-form input[type="text"]').each(function () {
-                $(this).val('');
-            });
-            $('#submit-container #mc-embedded-popup-subscribe').prop('disabled', 'disabled');
+            T3MCP.SaveJsonToCookie(_MC_cookie_name, CookieValues.HasSubmitted, '', '', '', 365)
+            $('#mce-success-response', responseWrapper).html(resp.msg).show();
+            $('input[type="text"]', T3MCP.Popup).val('');
+            $('input[type="submit"]', T3MCP.Popup).prop('disabled', 'disabled');
 
             setTimeout(function () {
-                MailChimpPopupForm.HideForm();
+                T3MCP.HideForm();
             }, 4500);
 
-        } else {
-            MailChimpPopupForm.SaveJsonToCookie(_MC_cookie_name, CookieValues.ErrorInSubmitted, '', '', '', 2);
-            var index = -1;
-            var msg;
-            try {
-                var parts = resp.msg.split(' - ', 2);
-                if (parts[1] == undefined) {
-                    msg = resp.msg;
-                } else {
-                    i = parseInt(parts[0]);
-                    if (i.toString() == parts[0]) {
-                        index = parts[0];
-                        msg = parts[1];
-                    } else {
-                        index = -1;
-                        msg = resp.msg;
-                    }
-                }
-            } catch (e) {
-                index = -1;
-                msg = resp.msg;
-            }
-            try {
-                if (index == -1) {
-                    $('#mce-' + resp.result + '-response').show();
-                    $('#mce-' + resp.result + '-response').html(msg);
-                } else {
-                    err_id = 'mce_tmp_error_msg';
-                    html = '<div id="' + err_id + '" style="' + err_style + '"> ' + msg + '</div>';
-
-                    var input_id = '#mc_embed_popup';
-                    var f = $(input_id);
-                    if (ftypes[index] == 'address') {
-                        input_id = '#mce-' + fnames[index] + '-addr1';
-                        f = $(input_id).parent().parent().get(0);
-                    } else if (ftypes[index] == 'date') {
-                        input_id = '#mce-' + fnames[index] + '-month';
-                        f = $(input_id).parent().parent().get(0);
-                    } else {
-                        input_id = '#mce-' + fnames[index];
-                        f = $().parent(input_id).get(0);
-                    }
-                    if (f) {
-                        $(f).append(html);
-                        $(input_id).focus();
-                    } else {
-                        $('#mce-' + resp.result + '-response').show();
-                        $('#mce-' + resp.result + '-response').html(msg);
-                    }
-                }
-            } catch (e) {
-                $('#mce-' + resp.result + '-response').show();
-                $('#mce-' + resp.result + '-response').html(msg);
-            }
+        }else{
+            T3MCP.Error(resp);
         }
-
-    }
-
+    },
+    Error:function(resp){
+        T3MCP.SaveJsonToCookie(_MC_cookie_name, CookieValues.ErrorInSubmitted, '', '', '', 2);
+        var index = -1;
+        var msg;
+        try {
+            var parts = resp.msg.split(' - ', 2);
+            if (parts[1] == undefined) {
+                msg = resp.msg;
+            } else {
+                i = parseInt(parts[0]);
+                if (i.toString() == parts[0]) {
+                    index = parts[0];
+                    msg = parts[1];
+                } else {
+                    index = -1;
+                    msg = resp.msg;
+                }
+            }
+        } catch (e) {
+            index = -1;
+            msg = resp.msg;
+        }
+        try{
+            $('#mce-' + resp.result + '-response', T3MCP.Popup).show();
+            $('#mce-' + resp.result + '-response', T3MCP.Popup).html(msg);
+        }catch(e) {
+            $('#mce-' + resp.result + '-response').show();
+            $('#mce-' + resp.result + '-response').html(msg);
+        }
+    },
+	Popup:null
 };
 
 
@@ -299,7 +256,6 @@ var CookieManager = {
         else var expires = "";
         document.cookie = name + "=" + value + expires + "; path=/";
     },
-
     ReadCookie: function (name) {
         var nameEQ = name + "=";
         var ca = document.cookie.split(';');
@@ -310,7 +266,6 @@ var CookieManager = {
         }
         return null;
     },
-
     EraseCookie: function (name) {
         createCookie(name, "", -1);
     }
