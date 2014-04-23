@@ -2,99 +2,101 @@ var fnames = new Array(); var ftypes = new Array(); fnames[0] = 'EMAIL'; ftypes[
 var _MailChimpPreloadChecks = 0;
 
 (function () {
-	var head = document.getElementsByTagName('head')[0];
-	var script = document.createElement('script');
-	script.type = 'text/javascript';
-	script.src = window.location.protocol + '//downloads.mailchimp.com/js/jquery.form-n-validate.js';
-	head.appendChild(script);
+	if(document.getElementById('mailchimp-form-validate') == null){
+		var head = document.getElementsByTagName('head')[0];
+		var script = document.createElement('script');
+		script.id = 'mailchimp-form-validate';
+		script.type = 'text/javascript';
+		script.src = window.location.protocol + '//downloads.mailchimp.com/js/jquery.form-n-validate.js';
+		head.appendChild(script);
+	}
+    setTimeout('IsMailChimpScriptLoaded();', 250);
 })();
 
-$(function () {
-	if (IsMailChimpScriptLoaded()) {
-		mce_init_form();
-	}
-});
 
 var IsMailChimpScriptLoaded = function () {
 	if (_MailChimpPreloadChecks > 40)
-		return false;
+		return;
 	_MailChimpPreloadChecks++;
 	try {
-		var validatorLoaded = $("#fake-form").validate({});
-		return true;
-	} catch (err) {
-		setTimeout('IsMailChimpScriptLoaded;', 250);
+      var validatorLoaded = $("#fake-form").validate({});
+	}catch (err){
+		setTimeout('IsMailChimpScriptLoaded();', 250);
 		return false;
 	}
+    mce_init_form();
+  
 };
 
 function mce_init_form() {
 	jQuery(document).ready(function ($) {
-		var embedSubscribeFormWrapper = $('.mailchimp-embed-form-wrapper');
-		var embedSubscribeForm = $('.mailchimp-embed-form', embedSubscribeFormWrapper);
-		var options = { errorClass: 'mce_inline_error', errorElement: 'div', onkeyup: function () { }, onfocusout: function () { }, onblur: function () { } };
-		var mce_validator = $("#mc-embedded-subscribe-form").validate(options);
-		embedSubscribeForm.unbind('submit');//remove the validator so we can get into beforeSubmit on the ajaxform, which then calls the validator
-		options = {
-			url: 'http://xxxxxx.list-manage.com/subscribe/post-json?u=xxxxxx&id=xxx&c=?', type: 'GET', dataType: 'json', contentType: "application/json; charset=utf-8",
-			beforeSubmit: function () {
-				$('#mce_tmp_error_msg', embedSubscribeFormWrapper).remove();
-				$('.datefield', embedSubscribeFormWrapper).each(
-					function () {
-						var txt = 'filled';
-						var fields = new Array();
-						var i = 0;
-						$(':text', this).each(
-							function () {
-								fields[i] = this;
-								i++;
-							});
-						$(':hidden', this).each(
-							function () {
-								var bday = false;
-								if (fields.length == 2) {
-									bday = true;
-									fields[2] = { 'value': 1970 };//trick birthdays into having years
-								}
-								if (fields[0].value == 'MM' && fields[1].value == 'DD' && (fields[2].value == 'YYYY' || (bday && fields[2].value == 1970))) {
-									this.value = '';
-								} else if (fields[0].value == '' && fields[1].value == '' && (fields[2].value == '' || (bday && fields[2].value == 1970))) {
-									this.value = '';
-								} else {
-									if (/\[day\]/.test(fields[0].name)) {
-										this.value = fields[1].value + '/' + fields[0].value + '/' + fields[2].value;
-									} else {
-										this.value = fields[0].value + '/' + fields[1].value + '/' + fields[2].value;
+		$('.mailchimp-embed-form-wrapper').each(function(){
+			var embedSubscribeFormWrapper = $(this);
+			var embedSubscribeForm = $('.mailchimp-embed-form', embedSubscribeFormWrapper);
+			var options = { errorClass: 'mce_inline_error', errorElement: 'div', onkeyup: function () { }, onfocusout: function () { }, onblur: function () { } };
+			var mce_validator = embedSubscribeForm.validate(options);
+			embedSubscribeForm.unbind('submit');//remove the validator so we can get into beforeSubmit on the ajaxform, which then calls the validator
+			options = {
+				url: 'http://tricky3.us8.list-manage.com/subscribe/post-json?u=a785008639c6bb0e1af98f017&id=21662557c9&c=?', type: 'GET', dataType: 'json', contentType: "application/json; charset=utf-8",
+				beforeSubmit: function () {
+					$('#mce_tmp_error_msg', embedSubscribeFormWrapper).remove();
+					$('.datefield', embedSubscribeFormWrapper).each(
+						function () {
+							var txt = 'filled';
+							var fields = new Array();
+							var i = 0;
+							$(':text', this).each(
+								function () {
+									fields[i] = this;
+									i++;
+								});
+							$(':hidden', this).each(
+								function () {
+									var bday = false;
+									if (fields.length == 2) {
+										bday = true;
+										fields[2] = { 'value': 1970 };//trick birthdays into having years
 									}
-								}
-							});
-					});
-				$('.phonefield-us', embedSubscribeFormWrapper).each(
-					function () {
-						var fields = new Array();
-						var i = 0;
-						$(':text', this).each(
-							function () {
-								fields[i] = this;
-								i++;
-							});
-						$(':hidden', this).each(
-							function () {
-								if (fields[0].value.length != 3 || fields[1].value.length != 3 || fields[2].value.length != 4) {
-									this.value = '';
-								} else {
-									this.value = 'filled';
-								}
-							});
-					});
-				return mce_validator.form();
-			},
-			success: function (resp) {
-				mce_success_cb(resp, embedSubscribeFormWrapper, embedSubscribeForm)
-			}
-		};
+									if (fields[0].value == 'MM' && fields[1].value == 'DD' && (fields[2].value == 'YYYY' || (bday && fields[2].value == 1970))) {
+										this.value = '';
+									} else if (fields[0].value == '' && fields[1].value == '' && (fields[2].value == '' || (bday && fields[2].value == 1970))) {
+										this.value = '';
+									} else {
+										if (/\[day\]/.test(fields[0].name)) {
+											this.value = fields[1].value + '/' + fields[0].value + '/' + fields[2].value;
+										} else {
+											this.value = fields[0].value + '/' + fields[1].value + '/' + fields[2].value;
+										}
+									}
+								});
+						});
+					$('.phonefield-us', embedSubscribeFormWrapper).each(
+						function () {
+							var fields = new Array();
+							var i = 0;
+							$(':text', this).each(
+								function () {
+									fields[i] = this;
+									i++;
+								});
+							$(':hidden', this).each(
+								function () {
+									if (fields[0].value.length != 3 || fields[1].value.length != 3 || fields[2].value.length != 4) {
+										this.value = '';
+									} else {
+										this.value = 'filled';
+									}
+								});
+						});
+					return mce_validator.form();
+				},
+				success: function (resp) {
+					mce_success_cb(resp, embedSubscribeFormWrapper, embedSubscribeForm)
+				}
+			};
 
-		embedSubscribeForm.ajaxForm(options);
+			embedSubscribeForm.ajaxForm(options);
+		});
 	});
 }
 function mce_success_cb(resp, wrapper, theForm) {

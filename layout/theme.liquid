@@ -1,8 +1,9 @@
 {% unless settings.modal_signup_first == '0' %}
-  {{ 'popupsignup.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'mailchimp.popupsignup.css' | asset_url | stylesheet_tag }}
   {{ 'bvalidator.css' | asset_url | stylesheet_tag }}
   {% include 'tricky3-popup-signup' %}
   {% include 'mailchimp-signup-script' %}
+  {{ 'tricky3.core.js'  | asset_url | script_tag }}
   {{ 'jquery.bvalidator.js'  | asset_url | script_tag }}
-  {{ 'mailchimp.js'  | asset_url | script_tag }}
+  {{ 'mailchimp.popup.js'  | asset_url | script_tag }}
 {% endunless %}
