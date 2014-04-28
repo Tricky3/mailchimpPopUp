@@ -40,54 +40,6 @@ function mce_init_form() {
 				url: 'http://tricky3.us8.list-manage.com/subscribe/post-json?u=a785008639c6bb0e1af98f017&id=21662557c9&c=?', type: 'GET', dataType: 'json', contentType: "application/json; charset=utf-8",
 				beforeSubmit: function () {
 					$('#mce_tmp_error_msg', embedSubscribeFormWrapper).remove();
-					$('.datefield', embedSubscribeFormWrapper).each(
-						function () {
-							var txt = 'filled';
-							var fields = new Array();
-							var i = 0;
-							$(':text', this).each(
-								function () {
-									fields[i] = this;
-									i++;
-								});
-							$(':hidden', this).each(
-								function () {
-									var bday = false;
-									if (fields.length == 2) {
-										bday = true;
-										fields[2] = { 'value': 1970 };//trick birthdays into having years
-									}
-									if (fields[0].value == 'MM' && fields[1].value == 'DD' && (fields[2].value == 'YYYY' || (bday && fields[2].value == 1970))) {
-										this.value = '';
-									} else if (fields[0].value == '' && fields[1].value == '' && (fields[2].value == '' || (bday && fields[2].value == 1970))) {
-										this.value = '';
-									} else {
-										if (/\[day\]/.test(fields[0].name)) {
-											this.value = fields[1].value + '/' + fields[0].value + '/' + fields[2].value;
-										} else {
-											this.value = fields[0].value + '/' + fields[1].value + '/' + fields[2].value;
-										}
-									}
-								});
-						});
-					$('.phonefield-us', embedSubscribeFormWrapper).each(
-						function () {
-							var fields = new Array();
-							var i = 0;
-							$(':text', this).each(
-								function () {
-									fields[i] = this;
-									i++;
-								});
-							$(':hidden', this).each(
-								function () {
-									if (fields[0].value.length != 3 || fields[1].value.length != 3 || fields[2].value.length != 4) {
-										this.value = '';
-									} else {
-										this.value = 'filled';
-									}
-								});
-						});
 					return mce_validator.form();
 				},
 				success: function (resp) {

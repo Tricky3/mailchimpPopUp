@@ -9,7 +9,7 @@ var _MailChimpPreloadChecks = 0;
 		script.src = window.location.protocol + '//downloads.mailchimp.com/js/jquery.form-n-validate.js';
 		head.appendChild(script);
 	}
-	setTimeout('IsMailChimpScriptLoaded();', 250);
+	setTimeout('CheckMailchimpScriptAndLoadPopup();', 250);
 })();
 
 var IsMailChimpScriptLoaded = function(){
@@ -19,7 +19,7 @@ var IsMailChimpScriptLoaded = function(){
 	try {
         var validatorLoaded = $("#fake-form1").validate();
     }catch (err) {
-        setTimeout('IsMailChimpScriptLoaded();', 250);
+        setTimeout('CheckMailchimpScriptAndLoadPopup();', 250);
         return false;
     }
 	
