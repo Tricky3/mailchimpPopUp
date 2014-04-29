@@ -12,7 +12,7 @@ var _MailChimpPreloadChecks = 0;
 	setTimeout('CheckMailchimpScriptAndLoadPopup();', 250);
 })();
 
-var IsMailChimpScriptLoaded = function(){
+var CheckMailchimpScriptAndLoadPopup = function(){
     if (_MailChimpPreloadChecks > 40)
 	  return;
 	_MailChimpPreloadChecks++;
