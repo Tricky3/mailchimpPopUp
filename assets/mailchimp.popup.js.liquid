@@ -6,7 +6,7 @@ var _MailChimpPreloadChecks = 0;
 		var script = document.createElement('script');
 		script.id = 'mailchimp-form-validate';
 		script.type = 'text/javascript';
-		script.src = window.location.protocol + '//downloads.mailchimp.com/js/jquery.form-n-validate.js';
+		script.src = '{{ "jquery.form-n-validate.js" | asset_url }}';
 		head.appendChild(script);
 	}
 	setTimeout('CheckMailchimpScriptAndLoadPopup();', 250);
