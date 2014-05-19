@@ -23,9 +23,8 @@ var CheckMailchimpScriptAndLoadPopup = function(){
         return false;
     }
 	
-	var isMobileDevice = T3Core.IsMobileDevice();
 	var query = T3Core.GetQueryStringByKey('signup');
-	if(!isMobileDevice){
+	if(_ShowPopupOnMobileDevices || !T3Core.IsMobileDevice()){
 		if(query == ''){
 			T3MCP.Initialize();
 		}else if(query == 1){

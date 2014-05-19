@@ -8,6 +8,7 @@
   var CookieValues = { NotSubmitted : 'NotSubmitted', HasSubmitted : 'HasSubmitted', ShowOnNextVisit: 'ShowOnNextVisit', ErrorInSubmitted: 'ErrorInSubmitted'};
   var _Popup_delay = {{ settings.modal_signup_delay_time }};
   var _URL = window.location.protocol+'//xxxxxx.list-manage.com/subscribe/post-json?u=xxxxxx&id=xxx&';
+  var _ShowPopupOnMobileDevices = {{ settings.show_popup_on_mobile_device }};
   var _ShowPopupOnCurrentPage = false;
   {% unless template == 'cart' or template contains 'customers' %}
     _ShowPopupOnCurrentPage = true;
