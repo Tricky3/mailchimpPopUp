@@ -84,9 +84,14 @@
       <th><label for="modal_signup_delay_time">Pop Up Delay Time (milliseconds)</label></th>
       <td><input type="input" name="modal_signup_delay_time" id="modal_signup_delay_time" size="10" value="2000" /></td>
     </tr>
-	<tr>
+    <tr>
       <th><label for="show_popup_on_mobile_device">Show popup on mobile devices</label></th>
-      <td><input type="input" name="show_popup_on_mobile_device" id="show_popup_on_mobile_device" size="10" value="false" /></td>
+      <td>
+        <select name="show_popup_on_mobile_device" id="show_popup_on_mobile_device">
+          <option value="true" selected="selected">Yes</option>
+          <option value="false">No</option>
+        </select>
+      </td>
     </tr>
   </table>
 </fieldset>
