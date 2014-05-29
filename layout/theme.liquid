@@ -11,4 +11,6 @@
 <!--Usage for the Embed Mailchimp form-->
 {% include 'tricky3-embed-signup' %}
 {{ 'mailchimp.embed.scss.css'  | asset_url | stylesheet_tag }}
+{{ 'bvalidator.css' | asset_url | stylesheet_tag }}
+{{ 'jquery.bvalidator.js'  | asset_url | script_tag }}
 {{ 'mailchimp.embed.js'  | asset_url | script_tag }}

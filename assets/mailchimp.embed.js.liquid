@@ -46,7 +46,8 @@ function mce_init_form() {
 					mce_success_cb(resp, embedSubscribeFormWrapper, embedSubscribeForm)
 				}
 			};
-
+			
+			embedSubscribeForm.bValidator({singleError: true});
 			embedSubscribeForm.ajaxForm(options);
 		});
 	});
