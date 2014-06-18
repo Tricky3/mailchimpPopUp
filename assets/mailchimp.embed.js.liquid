@@ -36,7 +36,7 @@ function mce_init_form() {
 			var options = { errorClass: 'mce_inline_error', errorElement: 'div', onkeyup: function () { }, onfocusout: function () { }, onblur: function () { } };
 			var mce_validator = embedSubscribeForm.validate(options);
 			embedSubscribeForm.unbind('submit');//remove the validator so we can get into beforeSubmit on the ajaxform, which then calls the validator
-			var formUrl = embedSubscribeForm.attr('data-jsonactionurl');
+			var formUrl = embedSubscribeForm.attr('action').replace('/post?','/post-json?')+'&c=?';
 			options = {
 				url: formUrl, type: 'GET', dataType: 'json', contentType: "application/json; charset=utf-8",
 				beforeSubmit: function () {
