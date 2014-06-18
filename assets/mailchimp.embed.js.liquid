@@ -36,8 +36,9 @@ function mce_init_form() {
 			var options = { errorClass: 'mce_inline_error', errorElement: 'div', onkeyup: function () { }, onfocusout: function () { }, onblur: function () { } };
 			var mce_validator = embedSubscribeForm.validate(options);
 			embedSubscribeForm.unbind('submit');//remove the validator so we can get into beforeSubmit on the ajaxform, which then calls the validator
+			var formUrl = embedSubscribeForm.attr('data-jsonactionurl');
 			options = {
-				url: 'http://tricky3.us8.list-manage.com/subscribe/post-json?u=a785008639c6bb0e1af98f017&id=21662557c9&c=?', type: 'GET', dataType: 'json', contentType: "application/json; charset=utf-8",
+				url: formUrl, type: 'GET', dataType: 'json', contentType: "application/json; charset=utf-8",
 				beforeSubmit: function () {
 					$('#mce_tmp_error_msg', embedSubscribeFormWrapper).remove();
 					return mce_validator.form();
