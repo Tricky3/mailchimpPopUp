@@ -155,7 +155,7 @@ var T3MCP = {
     FormSubmit: function () {
         var formElem = $('form', T3MCP.Popup);
         formElem.bind('submit', function (e) {
-            var url = _URL + $(this).serialize() + '&c=?';
+            var url = $(this).attr('action').replace('/post?','/post-json?') + '&' + $(this).serialize() + '&c=?';
             var options = {
                 url: url,
                 type: 'GET',
