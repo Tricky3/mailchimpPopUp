@@ -1,14 +1,15 @@
 .modalHolder{ 
-  display:none; /* or not - can be an inline form that gets popped... */
+  display:none; 
+  // or not - can be an inline form that gets popped...
+    display:block;
+    // this is midnight genius, works x-browser as far as I can tell
+    .ycenter{ display:table; position:fixed; top:0; left:0; bottom:0; right:0; width:100%; height:100%; z-index:10000; background-color:rgba({{ settings.modal_bg_color }}, {{ settings.modal_bg_transparency }}); text-align:{{ settings.signup_text_align }};}
+    .xcenter{ display:table-cell; vertical-align:middle; text-align:center;}
+    .modal{ position:relative; display:inline-block; *display:inline; zoom:1; background-color:{{ settings.modal_bg_color }}; background:{{ settings.signup_bg_color }}; border:1px solid {{ settings.signup_border_color }}; padding:1em; box-shadow:0 0 2px rgba(0,0,0,0.15);}
+    .popupClose{ position:absolute; top:0; right:0;}
+  }
 }
-.modalize{ // this is midnight genius, works x-browser as far as I can tell
-  display:block;
-  .ycenter{ display:table; position:fixed; top:0; left:0; bottom:0; right:0; width:100%; height:100%; z-index:10000; background-color:rgba({{ settings.modal_bg_color }}, {{ settings.modal_bg_transparency }}); text-align:{{ settings.signup_text_align }};}
-  .xcenter{ display:table-cell; vertical-align:middle; text-align:center;}
-  .modal{ position:relative; display:inline-block; *display:inline; zoom:1; background-color:{{ settings.modal_bg_color }}; background:{{ settings.signup_bg_color }}; border:1px solid {{ settings.signup_border_color }}; padding:1em; box-shadow:0 0 2px rgba(0,0,0,0.15);}
-  .popupClose{ position:absolute; top:0; right:0;}
-}
-#mc_embed_popup 
-input.mce_inline_error{border-color:#6B0505;} 
-#mc_embed_popup 
-div.mce_inline_error{margin: 0 0 1em 0; padding: 5px 10px; background-color:#6B0505; font-weight: bold; z-index: 1; color:#fff;}
+#mc_embed_popup{
+  input.mce_inline_error{border-color:#6B0505;} 
+  div.mce_inline_error{margin: 0 0 1em 0; padding: 5px 10px; background-color:#6B0505; font-weight: bold; z-index: 1; color:#fff;}
+} 
