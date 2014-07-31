@@ -1,47 +1,7 @@
-var _MailChimpPreloadChecks = 0;
-
-(function(){
-	if(document.getElementById('mailchimp-form-validate') == null){
-		var head = document.getElementsByTagName('head')[0];
-		var script = document.createElement('script');
-		script.id = 'mailchimp-form-validate';
-		script.type = 'text/javascript';
-		script.src = '{{ "jquery.form-n-validate.js" | asset_url }}';
-		head.appendChild(script);
-	}
-	setTimeout('CheckMailchimpScriptAndLoadPopup();', 250);
-})();
-
-var CheckMailchimpScriptAndLoadPopup = function(){
-    if (_MailChimpPreloadChecks > 40)
-	  return;
-	_MailChimpPreloadChecks++;
-	try {
-        var validatorLoaded = $("#fake-form1").validate();
-    }catch (err) {
-        setTimeout('CheckMailchimpScriptAndLoadPopup();', 250);
-        return false;
-    }
-	
-	var query = T3Core.GetQueryStringByKey('signup');
-	if(_ShowPopupOnMobileDevices || !T3Core.IsMobileDevice()){
-		if(query == ''){
-			T3MCP.Initialize();
-		}else if(query == 1){
-			T3MCP.Initialize();
-			T3MCP.ShowForm();
-		}
-	}
-};
-
 var VisitingCookieTracker = { Status: '', PageView: 0, Visits: 0, PopupAlreadyShownOnVisit: [] };
-
 var T3MCP = {
     HideForm: function (saveCookie) {
         T3MCP.Popup.hide();
-        if (saveCookie) {
-            //this.SaveJsonToCookie(_MC_cookie_name,CookieValues.ErrorInSubmitted,'','','',1);
-        }
     },
     ReadCookiesAndShowPopup: function () {
         var sessionCookie = T3Core.CookieManager.ReadCookie(_SessionCookieName);
@@ -163,7 +123,7 @@ var T3MCP = {
                 contentType: "application/json; charset=utf-8",
                 success: T3MCP.Success
             };
-            formElem.ajaxSubmit(options);
+			$.ajax(options);
             e.preventDefault();
             return false;
         });
@@ -265,3 +225,15 @@ var T3MCP = {
     },
 	Popup:null
 };
+
+(function(){
+	var query = T3Core.GetQueryStringByKey('signup');
+	if(_ShowPopupOnMobileDevices || !T3Core.IsMobileDevice()){
+		if(query == ''){
+			T3MCP.Initialize();
+		}else if(query == 1){
+			T3MCP.Initialize();
+			T3MCP.ShowForm();
+		}
+	}
+})();

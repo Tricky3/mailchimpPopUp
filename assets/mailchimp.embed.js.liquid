@@ -1,58 +1,33 @@
 var fnames = new Array(); var ftypes = new Array(); fnames[0] = 'EMAIL'; ftypes[0] = 'email'; fnames[1] = 'FNAME'; ftypes[1] = 'text'; fnames[2] = 'LNAME'; ftypes[2] = 'text';
-var _MailChimpPreloadChecks = 0;
 
-(function () {
-	if(document.getElementById('mailchimp-form-validate') == null){
-		var head = document.getElementsByTagName('head')[0];
-		var script = document.createElement('script');
-		script.id = 'mailchimp-form-validate';
-		script.type = 'text/javascript';
-		script.src = window.location.protocol + '//downloads.mailchimp.com/js/jquery.form-n-validate.js';
-		head.appendChild(script);
-	}
-    setTimeout('IsMailChimpScriptLoaded();', 250);
-})();
-
-
-var IsMailChimpScriptLoaded = function () {
-	if (_MailChimpPreloadChecks > 40)
-		return;
-	_MailChimpPreloadChecks++;
-	try {
-      var validatorLoaded = $("#fake-form").validate({});
-	}catch (err){
-		setTimeout('IsMailChimpScriptLoaded();', 250);
-		return false;
-	}
-    mce_init_form();
-  
-};
-
-function mce_init_form() {
-	jQuery(document).ready(function ($) {
-		$('.mailchimp-embed-form-wrapper').each(function(){
+$(document).ready(function() {
+	$('.mailchimp-embed-form-wrapper').each(function(){
+		$(this).submit(function(e){
 			var embedSubscribeFormWrapper = $(this);
 			var embedSubscribeForm = $('.mailchimp-embed-form', embedSubscribeFormWrapper);
-			var options = { errorClass: 'mce_inline_error', errorElement: 'div', onkeyup: function () { }, onfocusout: function () { }, onblur: function () { } };
-			var mce_validator = embedSubscribeForm.validate(options);
-			embedSubscribeForm.unbind('submit');//remove the validator so we can get into beforeSubmit on the ajaxform, which then calls the validator
-			var formUrl = embedSubscribeForm.attr('action').replace('/post?','/post-json?')+'&c=?';
-			options = {
-				url: formUrl, type: 'GET', dataType: 'json', contentType: "application/json; charset=utf-8",
-				beforeSubmit: function () {
-					$('#mce_tmp_error_msg', embedSubscribeFormWrapper).remove();
-					return mce_validator.form();
+			var submitButton = $('input[type="submit"]', embedSubscribeForm);
+			var formUrl = embedSubscribeForm.attr('action').replace('/post?','/post-json?')+ '&' + embedSubscribeForm.serialize() +'&c=?';
+			var options = {
+				url: formUrl, 
+				type: 'GET', 
+				dataType: 'json', 
+				contentType: "application/json; charset=utf-8",
+				beforeSend: function () {
+					$('.response-wrapper .response', embedSubscribeFormWrapper).hide();
 				},
-				success: function (resp) {
-					mce_success_cb(resp, embedSubscribeFormWrapper, embedSubscribeForm)
+				success: function(resp) {
+					mce_success_cb(resp, embedSubscribeFormWrapper, embedSubscribeForm);
 				}
 			};
 			
 			embedSubscribeForm.bValidator({singleError: true});
-			embedSubscribeForm.ajaxForm(options);
+			$.ajax(options);
+			e.preventDefault();
+			return false;
 		});
 	});
-}
+});
+
 function mce_success_cb(resp, wrapper, theForm) {
 	$('#mce-success-response', wrapper).hide();
 	$('#mce-error-response', wrapper).hide();
