@@ -1,4 +1,9 @@
 <script type="text/javascript">
+  //custom callbacks will go in the wrapper below..
+  var MCPopupCustomCallBack = {
+      Success:function(){}
+  };
+  
   {% assign first_visit = settings.modal_signup_first %}
   {% assign total_visits = settings.modal_signup_total %}
   var _MC_cookie_name = 'MCEvilPopupClosed';
@@ -9,6 +14,7 @@
   var _Popup_delay = {{ settings.modal_signup_delay_time }};
   var _ShowPopupOnMobileDevices = {{ settings.show_popup_on_mobile_device }};
   var _ShowPopupOnCurrentPage = false;
+  var _MCPopupCustomCallBack = MCPopupCustomCallBack;
   {% unless template == 'cart' or template contains 'customers' %}
     _ShowPopupOnCurrentPage = true;
   {% endunless %}

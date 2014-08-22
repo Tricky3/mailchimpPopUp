@@ -169,6 +169,8 @@ var T3MCP = {
             $('#mce-success-response', responseWrapper).html(resp.msg).show();
             $('input[type="text"]', T3MCP.Popup).val('');
             $('input[type="submit"]', T3MCP.Popup).prop('disabled', 'disabled');
+			
+			_MCPopupCustomCallBack ? _MCPopupCustomCallBack.Success() : null;
 
             setTimeout(function () {
                 T3MCP.HideForm();

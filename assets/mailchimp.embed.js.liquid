@@ -1,5 +1,10 @@
 var fnames = new Array(); var ftypes = new Array(); fnames[0] = 'EMAIL'; ftypes[0] = 'email'; fnames[1] = 'FNAME'; ftypes[1] = 'text'; fnames[2] = 'LNAME'; ftypes[2] = 'text';
 
+/*Custom callbacks will go in here..*/
+var MCEmbedCustomCallBack = {
+	Success:function(){}
+};
+
 $(document).ready(function() {
 	$('.mailchimp-embed-form-wrapper').each(function(){
 		$(this).submit(function(e){
@@ -37,6 +42,8 @@ function mce_success_cb(resp, wrapper, theForm) {
 		theForm.each(function () {
 			this.reset();
 		});
+		
+		MCEmbedCustomCallBack ? MCEmbedCustomCallBack.Success() : null;
 	} else {
 		var index = -1;
 		var msg;
