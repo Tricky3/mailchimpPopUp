@@ -47,5 +47,12 @@ var T3Core = {
 		EraseCookie: function (name) {
 			createCookie(name, "", -1);
 		}
+	},
+	TrackUserSignUp:function(wrapper){
+		var gaCategory = wrapper.attr("data-ga-category");
+		var gaAction = wrapper.attr("data-ga-action");
+		if(typeof(ga) == 'function' && gaCategory && gaAction){
+			ga('send', 'event', gaCategory, gaAction, window.location.href);
+		}
 	}
 };
