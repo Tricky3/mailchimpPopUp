@@ -1,7 +1,9 @@
 <script type="text/javascript">
   //custom callbacks will go in the wrapper below..
   var MCPopupCustomCallBack = {
-      Success:function(){}
+      Success:function(){
+		T3Core.TrackUserSignUp(T3MCP.Popup);
+	  }
   };
   
   {% assign first_visit = settings.modal_signup_first %}

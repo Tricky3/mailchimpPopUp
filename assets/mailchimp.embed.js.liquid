@@ -2,7 +2,9 @@ var fnames = new Array(); var ftypes = new Array(); fnames[0] = 'EMAIL'; ftypes[
 
 /*Custom callbacks will go in here..*/
 var MCEmbedCustomCallBack = {
-	Success:function(){}
+	Success:function(trackingElement){
+		T3Core.TrackUserSignUp(trackingElement);
+	}
 };
 
 $(document).ready(function() {
@@ -43,7 +45,7 @@ function mce_success_cb(resp, wrapper, theForm) {
 			this.reset();
 		});
 		
-		MCEmbedCustomCallBack ? MCEmbedCustomCallBack.Success() : null;
+		MCEmbedCustomCallBack ? MCEmbedCustomCallBack.Success(wrapper) : null;
 	} else {
 		var index = -1;
 		var msg;
