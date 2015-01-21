@@ -1,9 +1,25 @@
 <script type="text/javascript">
-  //custom callbacks will go in the wrapper below..
+  var MCPopupTrackers = {
+    Category:"UserSignupMailchimpPopup",
+    Actions:{ Success: "Success", Error:"Error", FormSubmitted:"FormSubmitted", OnShow:"Displayed", ClosedWithoutSignup:"ClosedWithoutSignup"}
+  };
+
   var MCPopupCustomCallBack = {
-      Success:function(){
-		T3Core.TrackUserSignUp(T3MCP.Popup);
-	  }
+      Success:function(msg){
+	    T3Core.TrackUserSignUp(MCPopupTrackers.Category, MCPopupTrackers.Actions.Success, msg);
+      },
+      Error:function(msg){
+        T3Core.TrackUserSignUp(MCPopupTrackers.Category, MCPopupTrackers.Actions.Error, msg);
+      },
+      OnShow:function(){
+        T3Core.TrackUserSignUp(MCPopupTrackers.Category, MCPopupTrackers.Actions.OnShow, "");
+      },
+      OnFormSubmitted:function(){
+        T3Core.TrackUserSignUp(MCPopupTrackers.Category, MCPopupTrackers.Actions.FormSubmitted, "");
+      },
+      ClosedWithoutSignup:function(){
+        T3Core.TrackUserSignUp(MCPopupTrackers.Category, MCPopupTrackers.Actions.ClosedWithoutSignup, "");
+      }
   };
   
   {% assign first_visit = settings.modal_signup_first %}

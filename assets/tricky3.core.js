@@ -67,5 +67,10 @@ var T3Core = {
 		if(typeof(ga) == 'function' && gaCategory && gaAction){
 			ga('send', 'event', gaCategory, gaAction, window.location.href);
 		}
+	},
+	TrackUserSignUp:function(gaCategory, gaAction, gaLabel){
+		if(typeof(ga) == 'function' && gaCategory && gaAction){
+			ga('send', 'event', gaCategory, gaAction, gaLabel);
+		}
 	}
 };
