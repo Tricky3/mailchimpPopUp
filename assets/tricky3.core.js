@@ -61,7 +61,7 @@ var T3Core = {
 	    return uri + separator + key + "=" + value;
 	  }
 	},
-	TrackUserSignUp:function(trackingElement){
+	TrackUserSignUpEmbed:function(trackingElement){
 		var gaCategory = trackingElement.attr("data-ga-category");
 		var gaAction = trackingElement.attr("data-ga-action");
 		if(typeof(ga) == 'function' && gaCategory && gaAction){
