@@ -10,9 +10,9 @@
       <td><input type="text" id="modal_bg_transparency" name="modal_bg_transparency" class="text" value="0.75"/></td>
     </tr>
     <tr>
-      <th><label for="signup_text_align">Email Signup Wrapper Text Align</label></th>
+      <th><label for="modal_text_align">Email Signup Wrapper Text Align</label></th>
       <td>
-        <select name="signup_text_align" id="signup_text_align">
+        <select name="modal_text_align" id="modal_text_align">
           <option value="left" selected="selected">Left</option>
           <option value="center">Center</option>
           <option value="right">Right</option>
@@ -20,25 +20,29 @@
       </td>
     </tr>
     <tr>
-      <th><label for="signup_bg_color">Signup Background Color</label></th>
-      <td><input type="text" id="signup_bg_color" name="signup_bg_color" class="color" value="#ffffff"/></td>
+      <th><label for="modal_bg_color">Signup Background Color</label></th>
+      <td><input type="text" id="modal_bg_color" name="modal_bg_color" class="color" value="#ffffff"/></td>
     </tr>
     <tr>
-      <th><label for="signup_border_color">Signup Border Color</label></th>
-      <td><input type="text" id="signup_border_color" name="signup_border_color" class="color" value="#000000"/></td>
+      <th><label for="modal_border_color">Signup Border Color</label></th>
+      <td><input type="text" id="modal_border_color" name="modal_border_color" class="color" value="#000000"/></td>
     </tr>
   </table>
 </fieldset>
 <fieldset>
-  <legend>Popup Modal Email Signup</legend>
+  <legend>Popup Email Signup</legend>
   <table>
     <tr>
-      <th><label for="signup_title">Sign Up Title</label></th>
-      <td><input type="input" name="signup_title" id="signup_title" value="Sign Up!" /></td>
+      <th><label for="modal_trigger">Popup Trigger Text</label></th>
+      <td><input type="input" name="modal_trigger" id="modal_trigger" value="Newsletter &rarr;" /></td>
     </tr>
     <tr>
-      <th><label for="signup_submit_text">Sign Up button text:</label></th>
-      <td><input type="input" name="signup_submit_text" id="signup_submit_text" value="Sign Up!" /></td>
+      <th><label for="modal_title">Sign Up Title</label></th>
+      <td><input type="input" name="modal_title" id="modal_title" value="Sign Up!" /></td>
+    </tr>
+    <tr>
+      <th><label for="modal_submit_text">Sign Up button text:</label></th>
+      <td><input type="input" name="modal_submit_text" id="modal_submit_text" value="Sign Up!" /></td>
     </tr>
     <tr>
       <th><label for="modal_signup_first">Which Visit to Popup First</label></th>
@@ -85,21 +89,28 @@
       <td><input type="input" name="modal_signup_delay_time" id="modal_signup_delay_time" size="10" value="2000" /></td>
     </tr>
     <tr>
-      <th><label for="show_popup_on_mobile_device">Show popup on mobile devices</label></th>
+      <th><label for="modal_show_on_mobile_device">Show popup on mobile devices</label></th>
       <td>
-        <select name="show_popup_on_mobile_device" id="show_popup_on_mobile_device">
+        <select name="modal_show_on_mobile_device" id="modal_show_on_mobile_device">
           <option value="true" selected="selected">Yes</option>
           <option value="false">No</option>
         </select>
       </td>
     </tr>
-	<tr>
-      <th><label for="allow_default_popup_successcallback">Show default mailchimp success response</label></th>
+    <tr>
+      <th><label for="modal_success_callback">What to show on successful submission</label></th>
       <td>
-        <select name="allow_default_popup_successcallback" id="allow_default_popup_successcallback">
-          <option value="true" selected="selected">Yes</option>
-          <option value="false">No</option>
+        <select name="modal_success_callback" id="modal_success_callback">
+          <option value="server" selected="selected">Server Response</option>
+          <option value="promo">Promo Code</option>
         </select>
+      </td>
+    </tr>
+    <tr>
+      <th><label for="modal_promo_code">Promo Code:</label></th>
+      <td>
+        <input type="input" name="modal_promo_code" id="modal_promo_code" value="" />
+        <p class="note">Must be enabled in preceding select menu</p>
       </td>
     </tr>
   </table>

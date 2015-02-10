@@ -7,12 +7,12 @@
         <a href="popupClose">x</a>
         <form action="http://xxxxxx.list-manage.com/subscribe/post?u=xxxxxx&id=xxx" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
           <fieldset class="mc-field-group">
-            <legend>{{ settings.signup_title }}</legend>
+            <legend>{{ settings.modal_title }}</legend>
             <label for="name">Name:</label><br>
             <input type="text" name="cm-name" id="name"><br>
             <label for="abcd-efgh">Email:</label><br>
             <input type="email" name="EMAIL" class="required email" data-bvalidator="required,email" id="mce-EMAIL" placeholder="you@youremail.com"{% if customer %} value="{{ customer.email }}"{% endif %} required>
-            <input type="submit" value="{{ settings.signup_submit_text }}" class="awesome">
+            <input type="submit" value="{{ settings.modal_submit_text }}" class="awesome">
           </fieldset>
           <div id="mce-responses" class="clearfix response-wrapper">
             <div class="response" id="mce-error-response" style="display:none"></div>
@@ -24,4 +24,4 @@
   </div>
 </div>
 <!-- external trigger if you want one on the page -->
-<a href="http://" class="popupTrigger">{{ settings.popup_signup_trigger }}</a>
+<a href="http://" class="popupTrigger">{{ settings.modal_trigger }}</a>

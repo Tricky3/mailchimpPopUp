@@ -1,33 +1,35 @@
 <script type="text/javascript">
-  var _MCAllowDefaulSuccessCallBack = {{ settings.allow_default_popup_successcallback }};
-  
+  {% if settings.modal_success_callback == 'server' %}
+    var _MCAllowDefaultSuccessCallBack = true;
+  {% else %}
+    var _MCAllowDefaultSuccessCallBack = false;
+  {% endif %}
   var MCPopupTrackers = {
     Category:"UserSignupMailchimpPopup",
     Actions:{ Success: "Success", Error:"Error", FormSubmitted:"FormSubmitted", OnShow:"Displayed", ClosedWithoutSignup:"ClosedWithoutSignup"}
   };
-
   var MCPopupCustomCallBack = {
-      Success:function(msg){
-	    if(_MCAllowDefaulSuccessCallBack){
-          T3Core.TrackUserSignUp(MCPopupTrackers.Category, MCPopupTrackers.Actions.Success, msg);
-        }else{
-		  //custom success callback can be done here for example, here we are showing some promo code from setting file...
-          //T3Core.TrackUserSignUp(MCPopupTrackers.Category, MCPopupTrackers.Actions.Success, 'Promo Code: {{ settings.signup_code }}');
-          //$('.mce-success-response', T3MCP.Popup).html('<span class="promo-code">Promo Code: <b>{{ settings.signup_code }}</b></span>').show();
-        }
-      },
-      Error:function(msg){
-        T3Core.TrackUserSignUp(MCPopupTrackers.Category, MCPopupTrackers.Actions.Error, msg);
-      },
-      OnShow:function(){
-        T3Core.TrackUserSignUp(MCPopupTrackers.Category, MCPopupTrackers.Actions.OnShow, "");
-      },
-      OnFormSubmitted:function(){
-        T3Core.TrackUserSignUp(MCPopupTrackers.Category, MCPopupTrackers.Actions.FormSubmitted, "");
-      },
-      ClosedWithoutSignup:function(){
-        T3Core.TrackUserSignUp(MCPopupTrackers.Category, MCPopupTrackers.Actions.ClosedWithoutSignup, "");
+    Success:function(msg){
+      if(_MCAllowDefaultSuccessCallBack){
+        T3Core.TrackUserSignUp(MCPopupTrackers.Category, MCPopupTrackers.Actions.Success, msg);
+      }else{
+        // A custom success callback can be created here. For example we are showing a promo code specified in the settings.html file...
+        T3Core.TrackUserSignUp(MCPopupTrackers.Category, MCPopupTrackers.Actions.Success, 'Promo Code: {{ settings.modal_promo_code }}');
+        $('.mce-success-response', T3MCP.Popup).html('<span class="promo-code">Promo Code: <b>{{ settings.modal_promo_code }}</b></span>').show();
       }
+    },
+    Error:function(msg){
+      T3Core.TrackUserSignUp(MCPopupTrackers.Category, MCPopupTrackers.Actions.Error, msg);
+    },
+    OnShow:function(){
+      T3Core.TrackUserSignUp(MCPopupTrackers.Category, MCPopupTrackers.Actions.OnShow, "");
+    },
+    OnFormSubmitted:function(){
+      T3Core.TrackUserSignUp(MCPopupTrackers.Category, MCPopupTrackers.Actions.FormSubmitted, "");
+    },
+    ClosedWithoutSignup:function(){
+      T3Core.TrackUserSignUp(MCPopupTrackers.Category, MCPopupTrackers.Actions.ClosedWithoutSignup, "");
+    }
   };
   
   {% assign first_visit = settings.modal_signup_first %}
@@ -38,7 +40,7 @@
   var _SessionCookieName = 'SessionCookie';
   var CookieValues = { NotSubmitted : 'NotSubmitted', HasSubmitted : 'HasSubmitted', ShowOnNextVisit: 'ShowOnNextVisit', ErrorInSubmitted: 'ErrorInSubmitted'};
   var _Popup_delay = {{ settings.modal_signup_delay_time }};
-  var _ShowPopupOnMobileDevices = {{ settings.show_popup_on_mobile_device }};
+  var _ShowPopupOnMobileDevices = {{ settings.modal_show_on_mobile_device }};
   var _ShowPopupOnCurrentPage = false;
   var _MCPopupCustomCallBack = MCPopupCustomCallBack;
   {% unless template == 'cart' or template contains 'customers' %}
