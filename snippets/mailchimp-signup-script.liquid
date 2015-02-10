@@ -1,4 +1,6 @@
 <script type="text/javascript">
+  var _MCAllowDefaulSuccessCallBack = {{ settings.allow_default_popup_successcallback }};
+  
   var MCPopupTrackers = {
     Category:"UserSignupMailchimpPopup",
     Actions:{ Success: "Success", Error:"Error", FormSubmitted:"FormSubmitted", OnShow:"Displayed", ClosedWithoutSignup:"ClosedWithoutSignup"}
@@ -6,7 +8,13 @@
 
   var MCPopupCustomCallBack = {
       Success:function(msg){
-	    T3Core.TrackUserSignUp(MCPopupTrackers.Category, MCPopupTrackers.Actions.Success, msg);
+	    if(_MCAllowDefaulSuccessCallBack){
+          T3Core.TrackUserSignUp(MCPopupTrackers.Category, MCPopupTrackers.Actions.Success, msg);
+        }else{
+		  //custom success callback can be done here for example, here we are showing some promo code from setting file...
+          //T3Core.TrackUserSignUp(MCPopupTrackers.Category, MCPopupTrackers.Actions.Success, 'Promo Code: {{ settings.signup_code }}');
+          //$('.mce-success-response', T3MCP.Popup).html('<span class="promo-code">Promo Code: <b>{{ settings.signup_code }}</b></span>').show();
+        }
       },
       Error:function(msg){
         T3Core.TrackUserSignUp(MCPopupTrackers.Category, MCPopupTrackers.Actions.Error, msg);
@@ -24,7 +32,7 @@
   
   {% assign first_visit = settings.modal_signup_first %}
   {% assign total_visits = settings.modal_signup_total %}
-  var _MC_cookie_name = 'MCEvilPopupClosed';
+  var _MCCookieName = 'MCEvilPopupClosed';
   var _Visits = [{{ first_visit }}{% for i in (1..total_visits) %}{% capture next_visit %}{{ first_visit | plus: i }}{% endcapture %},{{ next_visit }}{% endfor %}];
   var _PageViewNumber = {{ settings.modal_signup_page_view }};
   var _SessionCookieName = 'SessionCookie';
