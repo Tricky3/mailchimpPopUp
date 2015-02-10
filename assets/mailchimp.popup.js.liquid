@@ -103,7 +103,7 @@ var T3MCP = {
     },
     ShowForm: function (delay) {
         var delay = delay == null ? _Popup_delay : delay;
-        $('.mc_embed_close', T3MCP.Popup).show();
+        $('.popupClose', T3MCP.Popup).show();
         setTimeout(function () {
             T3MCP.Popup.fadeIn().addClass('modalize');
             _MCPopupCustomCallBack.OnShow();
