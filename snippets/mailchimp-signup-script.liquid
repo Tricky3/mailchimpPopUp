@@ -11,7 +11,7 @@
   var MCPopupCustomCallBack = {
     Success:function(msg){
       if(_MCAllowDefaultSuccessCallBack){
-        T3Core.TrackUserSignUp(MCPopupTrackers.Category, MCPopupTrackers.Actions.Success, msg);
+        T3Core.TrackUserSignUp(MCPopupTrackers.Category, MCPopupTrackers.Actions.Success, 'Opt-in confirmation email sent.');
       }else{
         // A custom success callback can be created here. For example we are showing a promo code specified in the settings.html file...
         T3Core.TrackUserSignUp(MCPopupTrackers.Category, MCPopupTrackers.Actions.Success, 'Promo Code: {{ settings.modal_promo_code }}');
