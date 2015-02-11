@@ -19,7 +19,7 @@
       }
     },
     Error:function(msg){
-      T3Core.TrackUserSignUp(MCPopupTrackers.Category, MCPopupTrackers.Actions.Error, msg);
+      T3Core.TrackUserSignUp(MCPopupTrackers.Category, MCPopupTrackers.Actions.Error, 'Error'); // substituting msg for 'Error' will print actual text, probably superfluous
     },
     OnShow:function(){
       T3Core.TrackUserSignUp(MCPopupTrackers.Category, MCPopupTrackers.Actions.OnShow, "");
