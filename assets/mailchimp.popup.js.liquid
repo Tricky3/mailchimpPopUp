@@ -172,7 +172,7 @@ var T3MCP = {
         $('.response', responseWrapper).hide();
         if (resp.result == "success") {
             T3MCP.SaveJsonToCookie(_MCCookieName, CookieValues.HasSubmitted, '', '', '', 365);
-            if(_MCAllowDefaulSuccessCallBack){
+            if(_MCAllowDefaultSuccessCallBack){
                 $('.mce-success-response', responseWrapper).html(resp.msg).show();
                 $('input[type="text"]', T3MCP.Popup).val('');
                 $('input[type="submit"]', T3MCP.Popup).prop('disabled', 'disabled');
@@ -189,7 +189,7 @@ var T3MCP = {
             if(resp.msg.indexOf('Click here to update your profile') != -1){
               T3MCP.SaveJsonToCookie(_MCCookieName, CookieValues.HasSubmitted, '', '', '', 365);
               
-              if(_MCAllowDefaulSuccessCallBack){
+              if(_MCAllowDefaultSuccessCallBack){
                   $('.mce-success-response', responseWrapper).html('Thank you.').show();
                   $('input[type="text"]', T3MCP.Popup).val('');
                   $('input[type="submit"]', T3MCP.Popup).prop('disabled', 'disabled');

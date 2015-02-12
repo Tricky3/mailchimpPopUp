@@ -21,3 +21,9 @@ __Includes:__
   * "FormSubmitted"
   * "Success"
   * "Error"
+
+* User setting to toggle between successful submission response actions:
+  * Standard server message
+  * Custom callback, e.g. for incentivisation via [Discount Code](http://docs.shopify.com/manual/your-store/discounts) delivery<sup>*</sup>
+
+<sub><sup>_(*) Note MailChimp requires double/confirmed opt-in so you may not actually want to deliver the code at this point_</sup></sub>
