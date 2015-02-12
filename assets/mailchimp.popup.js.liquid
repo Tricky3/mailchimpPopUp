@@ -5,7 +5,7 @@ var T3MCP = {
             _MCPopupCustomCallBack.ClosedWithoutSignup();
         }
 
-        T3MCP.Popup.hide();
+        T3MCP.Popup.removeClass('modalize');
     },
     ReadCookiesAndShowPopup: function () {
         var sessionCookie = T3Core.CookieManager.ReadCookie(_SessionCookieName);
@@ -105,7 +105,7 @@ var T3MCP = {
         var delay = delay == null ? _Popup_delay : delay;
         $('.popupClose', T3MCP.Popup).show();
         setTimeout(function () {
-            T3MCP.Popup.fadeIn().addClass('modalize');
+            T3MCP.Popup.addClass('modalize');
             _MCPopupCustomCallBack.OnShow();
         }, delay);
 
