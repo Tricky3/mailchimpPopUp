@@ -245,9 +245,9 @@ var T3MCP = {
 
 (function(){
     var query = T3Core.GetQueryStringByKey('signup');
-	var isMailChimpGoalKeeperPresent =  T3Core.CookieManager.ReadCookie('goal') != null;
+	var isMailChimpGoalkeeperPresent =  T3Core.CookieManager.ReadCookie('goal') != null;
     if(_ShowPopupOnMobileDevices || !T3Core.IsMobileDevice()){
-        if(query == '' && !isMailChimpGoalKeeperPresent){
+        if(query == '' && !isMailChimpGoalkeeperPresent){
             T3MCP.Initialize();
         }else if(query == 1){
             T3MCP.Initialize();
