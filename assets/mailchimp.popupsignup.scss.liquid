@@ -1,9 +1,10 @@
 .modalHolder{
-  display:none; /* or not - can be an inline form that gets popped... */
-  /* this is midnight genius, works x-browser as far as I can tell */
-  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+  display:none;
   .ycenter{ display:table; position:fixed; top:0; left:0; bottom:0; right:0; width:100%; height:100%; z-index:10000; background-color:rgba({{ settings.modal_overlay_color }}, {{ settings.modal_bg_transparency }});}
-  .xcenter{ display:table-cell; vertical-align:middle; text-align:center;}
+  .xcenter{
+    display:table-cell; vertical-align:middle; text-align:center;
+    > * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;}
+  }
   .modal{ position:relative; display:inline-block; *display:inline; zoom:1; text-align:{{ settings.modal_text_align }}; background-color:{{ settings.modal_bg_color }}; background:{{ settings.modal_bg_color }}; border:1px solid {{ settings.modal_border_color }}; padding:1em; margin:1em; box-shadow:0 0 2px rgba(0,0,0,0.15);}
   .popupClose{ position:absolute; top:0; right:0; padding-right:0.5em;}
   &.modalize{
