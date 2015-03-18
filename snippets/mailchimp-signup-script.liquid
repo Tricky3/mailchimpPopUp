@@ -17,6 +17,10 @@
         T3Core.TrackUserSignUp(MCPopupTrackers.Category, MCPopupTrackers.Actions.Success, 'Promo Code: {{ settings.modal_promo_code }}');
         $('.mce-success-response', T3MCP.Popup).html('<span class="promo-code">Promo Code: <b>{{ settings.modal_promo_code }}</b></span>').show();
       }
+	  
+	   {% if settings.signup_fb_tracking %}
+	   FBConversionTracking();
+	   {% endif %}
     },
     Error:function(msg){
       T3Core.TrackUserSignUp(MCPopupTrackers.Category, MCPopupTrackers.Actions.Error, 'Error'); // substituting msg for 'Error' will print actual text, probably superfluous
