@@ -4,6 +4,9 @@ var fnames = new Array(); var ftypes = new Array(); fnames[0] = 'EMAIL'; ftypes[
 var MCEmbedCustomCallBack = {
 	Success:function(trackingElement){
 		T3Core.TrackUserSignUpEmbed(trackingElement);
+		{% if settings.signup_fb_tracking %}
+			FBConversionTracking();
+		{% endif %}
 	}
 };
 
@@ -15,9 +18,9 @@ $(document).ready(function() {
 			var submitButton = $('input[type="submit"]', embedSubscribeForm);
 			var formUrl = embedSubscribeForm.attr('action').replace('/post?','/post-json?')+ '&' + embedSubscribeForm.serialize() +'&c=?';
 			var options = {
-				url: formUrl, 
-				type: 'GET', 
-				dataType: 'json', 
+				url: formUrl,
+				type: 'GET',
+				dataType: 'json',
 				contentType: "application/json; charset=utf-8",
 				beforeSend: function () {
 					$('.response-wrapper .response', embedSubscribeFormWrapper).hide();
@@ -26,7 +29,7 @@ $(document).ready(function() {
 					mce_success_cb(resp, embedSubscribeFormWrapper, embedSubscribeForm);
 				}
 			};
-			
+
 			embedSubscribeForm.bValidator({singleError: true});
 			$.ajax(options);
 			e.preventDefault();
@@ -44,7 +47,7 @@ function mce_success_cb(resp, wrapper, theForm) {
 		theForm.each(function () {
 			this.reset();
 		});
-		
+
 		MCEmbedCustomCallBack ? MCEmbedCustomCallBack.Success(wrapper) : null;
 	} else {
 		var index = -1;

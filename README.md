@@ -1,4 +1,4 @@
-# Mailchimp Modal Popup Signup 
+# Mailchimp Modal Popup Signup
 ## Module for Shopify themes
 
 __Includes:__
@@ -9,13 +9,13 @@ __Includes:__
 
 * Cookie-based configuration. Be as annoying as you like! Settings for:
   * Which site visit to display popup
-  * Which page to display on within a visit 
+  * Which page to display on within a visit
   * Whether to display once or on multiple visits
   * Time on target page before popup is displayed
   * Enable / disable on mobile devices
   * URL parameters to force enable/disable popup e.g. `yoursite.com/?signup=1`
 
-* Integrated [MailChimp Goal tracking](http://kb.mailchimp.com/integrations/other-integrations/integrate-goal-with-mailchimp)
+* Integrated [MailChimp Goal tracking](http://kb.mailchimp.com/integrations/other-integrations/integrate-goal-with-mailchimp) (must be enabled within MC admin)
 
 * Integrated Google Analytics Event-tracking for the following Actions:
   * "Displayed"
@@ -23,6 +23,8 @@ __Includes:__
   * "FormSubmitted"
   * "Success"
   * "Error"
+
+* Optional Facebook Conversion tracking
 
 * User setting to toggle between successful submission response actions:
   * Standard server message

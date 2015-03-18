@@ -31,7 +31,7 @@
       T3Core.TrackUserSignUp(MCPopupTrackers.Category, MCPopupTrackers.Actions.ClosedWithoutSignup, "");
     }
   };
-  
+
   {% assign first_visit = settings.modal_signup_first %}
   {% assign total_visits = settings.modal_signup_total %}
   var _MCCookieName = 'MCEvilPopupClosed';
@@ -46,4 +46,21 @@
   {% unless template == 'cart' or template contains 'customers' %}
     _ShowPopupOnCurrentPage = true;
   {% endunless %}
+  {% if settings.signup_fb_tracking %}
+    var FBConversionTracking = function(){
+      (function() {
+        var _fbq = window._fbq || (window._fbq = []);
+        if (!_fbq.loaded) {
+          var fbds = document.createElement('script');
+          fbds.async = true;
+          fbds.src = '//connect.facebook.net/en_US/fbds.js';
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(fbds, s);
+          _fbq.loaded = true;
+        }
+      })();
+      window._fbq = window._fbq || [];
+      window._fbq.push(['EmailSignup', '{{ settings.signup_fb_pixel }}', {'value':'0.00','currency':'USD'}]); // OG
+    };
+  {% endif %}
 </script>
