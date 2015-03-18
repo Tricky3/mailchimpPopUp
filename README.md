@@ -15,7 +15,7 @@ __Includes:__
   * Enable / disable on mobile devices
   * URL parameters to force enable/disable popup e.g. `yoursite.com/?signup=1`
 
-* Integrated [MailChimp Goal tracking](http://kb.mailchimp.com/integrations/other-integrations/integrate-goal-with-mailchimp) (must be enabled within MC admin)
+* [MailChimp Goal](http://kb.mailchimp.com/integrations/other-integrations/integrate-goal-with-mailchimp)-aware (if Goal is enabled and user / pixel is activated, popup will not show)
 
 * Integrated Google Analytics Event-tracking for the following Actions:
   * "Displayed"
