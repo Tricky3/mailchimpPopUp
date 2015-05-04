@@ -21,18 +21,23 @@
 	   {% if settings.signup_fb_tracking %}
 	   FBConversionTracking();
 	   {% endif %}
+	   console.log('Success '+ msg);
     },
     Error:function(msg){
       T3Core.TrackUserSignUp(MCPopupTrackers.Category, MCPopupTrackers.Actions.Error, 'Error'); // substituting msg for 'Error' will print actual text, probably superfluous
+	  console.log('Error '+ msg);
     },
     OnShow:function(){
       T3Core.TrackUserSignUp(MCPopupTrackers.Category, MCPopupTrackers.Actions.OnShow, "");
+	  console.log('Popup is now visible');
     },
     OnFormSubmitted:function(){
       T3Core.TrackUserSignUp(MCPopupTrackers.Category, MCPopupTrackers.Actions.FormSubmitted, "");
+	  console.log('Form submitted...');
     },
     ClosedWithoutSignup:function(){
       T3Core.TrackUserSignUp(MCPopupTrackers.Category, MCPopupTrackers.Actions.ClosedWithoutSignup, "");
+	  console.log('User has closed without signing up...');
     }
   };
 
