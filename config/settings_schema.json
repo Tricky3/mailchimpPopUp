@@ -1,0 +1,232 @@
+{
+  "name": "Modal Styles",
+  "settings": [
+    {
+      "type": "color",
+      "id": "modal_overlay_color",
+      "label": "Modal Overlay Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "modal_bg_transparency",
+      "label": "Modal Overlay Opacity (0–1.0)",
+      "default": "0.75"
+    },
+    {
+      "type": "select",
+      "id": "modal_text_align",
+      "label": "Modal Text Align",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "color",
+      "id": "modal_bg_color",
+      "label": "Modal Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "modal_border_color",
+      "label": "Modal Border Color",
+      "default": "#000000"
+    }
+  ]
+},
+{
+  "name": "Popup Email Signup",
+  "settings": [
+    {
+      "type": "text",
+      "id": "modal_trigger",
+      "label": "Popup Trigger Text",
+      "default": "Newsletter →"
+    },
+    {
+      "type": "text",
+      "id": "modal_title",
+      "label": "Sign Up Title",
+      "default": "Sign Up!"
+    },
+    {
+      "type": "text",
+      "id": "modal_submit_text",
+      "label": "Sign Up button text:",
+      "default": "Sign Up!"
+    },
+    {
+      "type": "select",
+      "id": "modal_signup_first",
+      "label": "Which Visit to Popup First",
+      "options": [
+        {
+          "value": "0",
+          "label": "0 (inactive)"
+        },
+        {
+          "value": "1",
+          "label": "1st"
+        },
+        {
+          "value": "2",
+          "label": "2nd"
+        },
+        {
+          "value": "3",
+          "label": "3rd"
+        },
+        {
+          "value": "4",
+          "label": "4th"
+        }
+      ],
+      "default": "0"
+    },
+    {
+      "type": "select",
+      "id": "modal_signup_total",
+      "label": "Pop Up on Multiple Visits?",
+      "options": [
+        {
+          "value": "0",
+          "label": "No, just once"
+        },
+        {
+          "value": "1",
+          "label": "twice"
+        },
+        {
+          "value": "2",
+          "label": "three times"
+        },
+        {
+          "value": "3",
+          "label": "four times"
+        },
+        {
+          "value": "4",
+          "label": "five times"
+        },
+        {
+          "value": "5",
+          "label": "six times"
+        },
+        {
+          "value": "6",
+          "label": "seven times"
+        },
+        {
+          "value": "7",
+          "label": "eight times"
+        },
+        {
+          "value": "8",
+          "label": "nine times"
+        },
+        {
+          "value": "9",
+          "label": "ten times"
+        }
+      ],
+      "default": "0"
+    },
+    {
+      "type": "select",
+      "id": "modal_signup_page_view",
+      "label": "Within a visit, which page?",
+      "options": [
+        {
+          "value": "1",
+          "label": "1st page"
+        },
+        {
+          "value": "2",
+          "label": "2nd page"
+        },
+        {
+          "value": "3",
+          "label": "3rd page"
+        },
+        {
+          "value": "4",
+          "label": "4th page"
+        }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "text",
+      "id": "modal_signup_delay_time",
+      "label": "Pop Up Delay Time (milliseconds)",
+      "default": "2000"
+    },
+    {
+      "type": "select",
+      "id": "modal_show_on_mobile_device",
+      "label": "Show popup on mobile devices",
+      "options": [
+        {
+          "value": "true",
+          "label": "Yes"
+        },
+        {
+          "value": "false",
+          "label": "No"
+        }
+      ],
+      "default": "true"
+    },
+    {
+      "type": "select",
+      "id": "modal_success_callback",
+      "label": "What to show on successful submission",
+      "options": [
+        {
+          "value": "server",
+          "label": "Server Response"
+        },
+        {
+          "value": "promo",
+          "label": "Promo Code"
+        }
+      ],
+      "default": "server"
+    },
+    {
+      "type": "text",
+      "id": "modal_promo_code",
+      "label": "Promo Code:",
+      "info": "Must be enabled in preceding select menu"
+    }
+  ]
+},
+{
+  "name": "Facebook Tracking for Email Signups",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "signup_fb_tracking",
+      "label": "Enable FB tracking"
+    },
+    {
+      "type": "text",
+      "id": "signup_fb_pixel",
+      "label": "FB Pixel ID",
+      "default": ""
+    }
+  ]
+}
