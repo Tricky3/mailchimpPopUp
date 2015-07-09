@@ -35,9 +35,9 @@
       T3Core.TrackUserSignUp(MCPopupTrackers.Category, MCPopupTrackers.Actions.FormSubmitted, "");
 	  console.log('Form submitted...');
     },
-    ClosedWithoutSignup:function(){
-      T3Core.TrackUserSignUp(MCPopupTrackers.Category, MCPopupTrackers.Actions.ClosedWithoutSignup, "");
-	  console.log('User has closed without signing up...');
+    ClosedWithoutSignup:function(msg){
+      T3Core.TrackUserSignUp(MCPopupTrackers.Category, MCPopupTrackers.Actions.ClosedWithoutSignup, msg);
+	  console.log('User has closed without signing up...'+msg);
     }
   };
 

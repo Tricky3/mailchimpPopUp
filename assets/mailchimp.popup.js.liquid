@@ -136,20 +136,20 @@ var T3MCP = {
     },
     InitCustomEvents: function () {
         $('.popupClose', T3MCP.Popup).click(function () {
-            T3MCP.HideForm(true);
+            T3MCP.HideForm(true, 'User has clicked on close button');
             return false;
         });
 
         $(document).keydown(function (e) {
             keycode = e == null ? event.keyCode : e.which;
             if (keycode == 27) {
-                T3MCP.HideForm(true);
+                T3MCP.HideForm(true, 'User has pressed escape key');
             }
         });
 
         $('body').click(function (e) {
             if ($(e.target).is($('div.xcenter', T3MCP.Popup))) {
-                T3MCP.HideForm(true);
+                T3MCP.HideForm(true, 'User has clicked outside the form');
             }
         });
         
