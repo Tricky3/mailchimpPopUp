@@ -65,12 +65,12 @@ var T3Core = {
 		var gaCategory = trackingElement.attr("data-ga-category");
 		var gaAction = trackingElement.attr("data-ga-action");
 		if(typeof(ga) == 'function' && gaCategory && gaAction){
-			ga('send', 'event', gaCategory, gaAction, window.location.href);
+			ga('send', 'event', gaCategory, gaAction, window.location.href, 1);
 		}
 	},
 	TrackUserSignUp:function(gaCategory, gaAction, gaLabel){
 		if(typeof(ga) == 'function' && gaCategory && gaAction){
-			ga('send', 'event', gaCategory, gaAction, gaLabel);
+			ga('send', 'event', gaCategory, gaAction, gaLabel, 1);
 		}
 	}
 };
