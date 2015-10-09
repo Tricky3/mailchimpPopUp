@@ -50,11 +50,12 @@
   var CookieValues = { NotSubmitted : 'NotSubmitted', HasSubmitted : 'HasSubmitted', ShowOnNextVisit: 'ShowOnNextVisit', ErrorInSubmitted: 'ErrorInSubmitted'};
   var _Popup_delay = {{ settings.modal_signup_delay_time }};
   var _ShowPopupOnMobileDevices = {{ settings.modal_show_on_mobile_device }};
-  var _ShowPopupOnCurrentPage = false;
   var _MCPopupCustomCallBack = MCPopupCustomCallBack;
-  {% unless template == 'cart' or template contains 'customers' %}
-    _ShowPopupOnCurrentPage = true;
-  {% endunless %}
+  {% if customer or template == 'cart' %}
+    var _ShowPopupOnCurrentPage = false;
+  {% else %}
+    var _ShowPopupOnCurrentPage = true;
+  {% endif %}
   {% if settings.signup_fb_tracking %}
     var FBConversionTracking = function(){
       (function() {
