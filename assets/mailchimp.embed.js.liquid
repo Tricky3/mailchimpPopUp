@@ -5,7 +5,11 @@ var MCEmbedCustomCallBack = {
 	Success:function(trackingElement){
 		T3Core.TrackUserSignUpEmbed(trackingElement);
 		{% if settings.signup_fb_tracking %}
-			FBConversionTracking();
+			T3Core.TrackFacebookLeadSignup({
+	          currency:  trackingElement.attr('data-shopcurrency'), 
+	          value: 0.00,
+	          content_name: trackingElement.attr('data-ga-action')
+	        });
 		{% endif %}
 	}
 };

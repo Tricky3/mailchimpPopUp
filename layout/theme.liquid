@@ -1,9 +1,9 @@
+<script type="text/javascript" src="//tricky3.io/t3cdn/t3core/tricky3.core.js"></script>
 {% unless settings.modal_signup_first == '0' %}
   {{ 'mailchimp.popupsignup.scss.css' | asset_url | stylesheet_tag }}
   {{ 'bvalidator.css' | asset_url | stylesheet_tag }}
   {% include 'tricky3-popup-signup' %}
   {% include 'mailchimp-signup-script' %}
-  {{ 'tricky3.core.js'  | asset_url | script_tag }}
   {{ 'jquery.bvalidator.js'  | asset_url | script_tag }}
   {{ 'mailchimp.popup.js'  | asset_url | script_tag }}
 {% endunless %}

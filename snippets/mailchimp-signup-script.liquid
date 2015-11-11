@@ -19,7 +19,11 @@
       }
 	  
 	   {% if settings.signup_fb_tracking %}
-	   FBConversionTracking();
+	     T3Core.TrackFacebookLeadSignup({
+		  currency: '{{ shop.currency }}', 
+		  value: 0.00,
+		  content_name: MCPopupTrackers.Category
+		 });
 	   {% endif %}
 	   console.log('Success '+ msg);
     },
@@ -55,21 +59,4 @@
   {% unless template == 'cart' or template contains 'customers' %}
     _ShowPopupOnCurrentPage = true;
   {% endunless %}
-  {% if settings.signup_fb_tracking %}
-    var FBConversionTracking = function(){
-      (function() {
-        var _fbq = window._fbq || (window._fbq = []);
-        if (!_fbq.loaded) {
-          var fbds = document.createElement('script');
-          fbds.async = true;
-          fbds.src = '//connect.facebook.net/en_US/fbds.js';
-          var s = document.getElementsByTagName('script')[0];
-          s.parentNode.insertBefore(fbds, s);
-          _fbq.loaded = true;
-        }
-      })();
-      window._fbq = window._fbq || [];
-      window._fbq.push(['EmailSignup', '{{ settings.signup_fb_pixel }}', {'value':'0.00','currency':'USD'}]);
-    };
-  {% endif %}
 </script>
