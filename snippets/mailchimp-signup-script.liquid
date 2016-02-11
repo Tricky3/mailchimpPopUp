@@ -20,8 +20,6 @@
 	  
 	   {% if settings.signup_fb_tracking %}
 	     T3Core.TrackFacebookCompleteRegistration({
-		  currency: '{{ shop.currency }}', 
-		  value: 0.00,
 		  content_name: MCPopupTrackers.Category
 		 });
 	   {% endif %}

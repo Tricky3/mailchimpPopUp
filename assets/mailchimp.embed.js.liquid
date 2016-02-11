@@ -6,8 +6,6 @@ var MCEmbedCustomCallBack = {
 		T3Core.TrackUserSignUpEmbed(trackingElement);
 		{% if settings.signup_fb_tracking %}
 			T3Core.TrackFacebookCompleteRegistration({
-	          currency:  trackingElement.attr('data-shopcurrency'), 
-	          value: 0.00,
 	          content_name: trackingElement.attr('data-ga-action')
 	        });
 		{% endif %}
