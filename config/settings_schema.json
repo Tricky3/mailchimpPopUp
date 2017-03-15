@@ -225,8 +225,7 @@
     {
       "type": "text",
       "id": "signup_fb_pixel",
-      "label": "FB Pixel ID",
-      "default": ""
+      "label": "FB Pixel ID"
     }
   ]
 }
